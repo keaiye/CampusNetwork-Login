@@ -13,5 +13,5 @@
 # 配置方法
 - StudentID #学号
 - Password  #密码
-- Operator  #联通unicom 电信telecom 运营商选择
-- Retry     #True开启 False关闭 用于登录失败后是否重试（无限重试，直到登录成功才结束进程）
+- Operator  #运营商选择
+- Retry     #用于登录失败后是否重试（无限重试，直到登录成功才结束进程）
