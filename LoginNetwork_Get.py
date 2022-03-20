@@ -17,7 +17,7 @@ StudentID = ""
 Password = ""
 # 联通unicom 电信telecom
 Operator = "telecom"
-# True开启 False关闭 用于登录失败后是否重试（无限重试，直到登录成功才结束进程）
+# #True开启 False关闭 用于登录失败后是否重试（无限重试，直到登录成功才结束进程）
 Retry = False
 
 
@@ -38,13 +38,14 @@ def network():
     print("####################开始执行####################")
     if title[0] in state_title[0]:
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "校园网处于登录状态")
+        time.sleep(1)
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "正在尝试注消后登录")
-        logout()
+        logout()  # 注消登录
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "等待15秒后登录")
         time.sleep(15)
-        login()
+        login()  # 登录
     else:
-        login()
+        login()  # 登录
 
 
 def login():
