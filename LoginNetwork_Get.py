@@ -17,7 +17,7 @@ StudentID = ""
 Password = ""
 # 联通unicom 电信telecom
 Operator = "telecom"
-# 登录失败后是否重试（无限重试，直到登录成功才结束进程）True开启 False关闭
+# True开启 False关闭 用于登录失败后是否重试（无限重试，直到登录成功才结束进程）
 Retry = False
 
 
