@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.9
 # -*- coding: utf-8 -*-
 
-# CampusNetwork-AutoLogin 广西农业职业技术大学校园网登录
+# CampusNetwork-Login 广西农业职业技术大学校园网登录
 # update：2022/03/20 22:30
 # https://github.com/keaiye/CampusNetwork-Login
 
