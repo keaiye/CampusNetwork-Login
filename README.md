@@ -1,4 +1,4 @@
-# CampusNetwork-AutoLogin
+# CampusNetwork-Login
 用于广西农业职业技术大学校园网登录
 
 大一的时候发现校园网每天都要重新登录一次，烦得要死 所以当时弄了个脚本
