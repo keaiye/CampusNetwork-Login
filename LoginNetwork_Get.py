@@ -1,8 +1,10 @@
 #!/usr/bin/env python3.9
 # -*- coding: utf-8 -*-
+
 # CampusNetwork-AutoLogin 广西农业职业技术大学校园网登录
 # update：2022/03/20 22:30
 # https://github.com/keaiye/CampusNetwork-Login
+
 from datetime import datetime
 from bs4 import BeautifulSoup
 import json5
@@ -15,6 +17,8 @@ StudentID = ""
 Password = ""
 # 联通unicom 电信telecom
 Operator = "telecom"
+# 登录失败后是否重试（无限重试，直到登录成功才结束进程）True开启 False关闭
+Retry = False
 
 
 def network():
@@ -31,8 +35,10 @@ def network():
     r = requests.get(url, headers=headers)
     state_title = BeautifulSoup(r.text, 'html.parser').title.string
 
+    print("####################开始执行####################")
     if title[0] in state_title[0]:
-        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "校园网处于登录状态，正在尝试注消后在登录")
+        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "校园网处于登录状态")
+        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "正在尝试注消后登录")
         logout()
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "等待15秒后登录")
         time.sleep(15)
@@ -59,11 +65,16 @@ def login():
 
     if "1" in result:
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "登录成功", r)
-        print("------------------------------------------")
+        return
+        # input()
     else:
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "登录失败:", r)
-        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "正在尝试重新登录")
-        login()
+        if Retry:
+            print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "正在尝试重新登录")
+            login()
+        else:
+            return
+            # input()
 
 
 def logout():
