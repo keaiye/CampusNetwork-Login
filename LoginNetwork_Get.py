@@ -1,9 +1,13 @@
 #!/usr/bin/env python3.9
 # -*- coding: utf-8 -*-
-
-# CampusNetwork-Login 广西农业职业技术大学校园网登录
-# update：2022/03/20 22:30
-# https://github.com/keaiye/CampusNetwork-Login
+'''
+    @Name: CampusNetwork-Login 广西农业职业技术大学校园网登录
+    @File: LoginNetwork_Get.py
+    @Version: 1.5
+    @UpdateTime: 2022/03/23 23:55
+    @CreateTime: 2020/11/15 18:15
+    @Github https://github.com/keaiye/CampusNetwork-Login
+'''
 
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -18,15 +22,12 @@ Password = ""
 # 联通unicom 电信telecom
 Operator = "telecom"
 # True开启 False关闭 用于登录失败后是否重试（无限重试，直到登录成功才结束进程）
-Retry = False
+Retry = True
 
 
 def network():
     url = "http://10.10.10.2/"
     headers = {
-        "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-        "Connection": "keep-alive",
         "Host": "10.10.10.2",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.56"
     }
@@ -38,7 +39,6 @@ def network():
     print("####################开始执行####################")
     if title[0] in state_title[0]:
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "校园网处于登录状态")
-        time.sleep(1)
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "正在尝试注消后登录")
         logout()  # 注消登录
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "等待15秒后登录")
@@ -51,9 +51,6 @@ def network():
 def login():
     url = f"http://10.10.10.2/drcom/login?callback=dr1003&DDDDD={StudentID}@{Operator}&upass={Password}&0MKKey=123456&R1=0&R2=&R3=0&R6=0&para=00&v6ip=&terminal_type=1"
     headers = {
-        "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-        "Connection": "keep-alive",
         "Host": "10.10.10.2",
         "Referer": "http://10.10.10.2/a79.htm",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.56"
@@ -67,7 +64,6 @@ def login():
     if "1" in result:
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "登录成功", r)
         return
-        # input()
     else:
         print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "登录失败:", r)
         if Retry:
@@ -75,15 +71,11 @@ def login():
             login()
         else:
             return
-            # input()
 
 
 def logout():
     url = f"http://10.10.10.2/drcom/logout?callback=dr1005"
     headers = {
-        "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-        "Connection": "keep-alive",
         "Host": "10.10.10.2",
         "Referer": "http://10.10.10.2/a79.htm",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.56"
@@ -93,4 +85,5 @@ def logout():
     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "注消成功")
 
 
-network()
+if __name__ == '__main__':
+    network()
